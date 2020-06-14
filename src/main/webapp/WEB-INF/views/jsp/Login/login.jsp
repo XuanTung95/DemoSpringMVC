@@ -42,14 +42,14 @@
 					
 					
 					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-						<input class="input100" type="text" name="email">
+						<input class="input100" type="text" id="email">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Email</span>
 					</div>
 					
 					
 					<div class="wrap-input100 validate-input" data-validate="Password is required">
-						<input class="input100" type="password" name="pass">
+						<input class="input100" type="password" id="pass">
 						<span class="focus-input100"></span>
 						<span class="label-input100">Password</span>
 					</div>
@@ -71,7 +71,7 @@
 			
 
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button id="loginBtn" class="login100-form-btn">
 							Login
 						</button>
 					</div>
@@ -119,6 +119,24 @@
 	<script src="<c:url value="/resources/vendor/countdowntime/countdowntime.js" />"></script>
 <!--===============================================================================================-->
 	<script src="<c:url value="/resources/js/main.js" />"></script>
+	<script>
+	    $("#loginBtn").click(function(event){
+		  event.preventDefault();
+		  makeAjaxRequest();
+		});
+		function makeAjaxRequest() {
+		  $.ajax({
+		      url: '<c:url value="/login" />',
+		      data: { email: $("#email").val(), pass : $("#pass").val()},
+		      type: 'POST',
+		      success: function(data){
+		        //code to open in new window comes here
+		        console.log(data);
+		      }
+		  });
+		}
+	</script>
+	
 
 </body>
 </html>
